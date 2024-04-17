@@ -1,0 +1,1 @@
+web: java -jar target/compactkeep2.jar
