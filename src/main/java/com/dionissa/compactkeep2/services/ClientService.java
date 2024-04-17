@@ -17,7 +17,7 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
     @Autowired
-    public ClientService(ClientRepository clientRepository){
+    public ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 
@@ -44,4 +44,10 @@ public class ClientService {
     public List<Client> findClientsByName(String name) {
         return clientRepository.findByName(name);
     }
+
+    public List<Client> findClientsByNameAndPhoneNumberAndNotes(String name, String phoneNumber, String notes) {
+        return clientRepository
+                .findByNameContainingIgnoreCaseAndPhoneNumberContainingIgnoreCaseAndNotesContainingIgnoreCase(name,
+                        phoneNumber, notes);
     }
+}
