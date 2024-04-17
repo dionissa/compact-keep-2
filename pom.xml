@@ -1,81 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.dionissa</groupId>
+	<artifactId>compactkeep2</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>compactkeep2</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>1.8</java.version> <!-- Alteração da versão do Java para 1.8 -->
+		<vaadin.version>24.3.9</vaadin.version>
+	</properties>
+	<dependencies>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.4</version> <!-- Atualização da versão do Spring Boot -->
-    </parent>
-
-    <groupId>com.dionissa</groupId>
-    <artifactId>compactkeep2</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>compactkeep2</name>
-    <description>Demo project for Spring Boot</description>
-    <properties>
-        <!-- Atualização da versão do Java -->
-        <java.version>17</java.version>
-        <!-- Remoção da versão do Vaadin, pois o Vaadin está incluído automaticamente pelo Spring Boot -->
-    </properties>
-
-    <dependencies>
-        <!-- Dependências do seu projeto -->
-
-        <!-- Remoção da dependência do MongoDB, pois parece que não está sendo usada -->
-        <!-- Remoção da dependência do H2, pois parece que não está sendo usada -->
-        <!-- Adição da dependência do PostgreSQL -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.18</version>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
+            <version>24.3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <version>24.3.9</version>
         </dependency>
 
-        <!-- Adição da dependência do MySQL -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version>
-        </dependency>
-    </dependencies>
 
-    <build>
-        <finalName>compactkeep2</finalName>
-        <plugins>
-            <!-- Plugin para empacotar o projeto Spring Boot -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            
-            <!-- Plugin para fazer o deploy no Heroku -->
-            <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>3.0.3</version>
-                <configuration>
-                    <!-- Nome do aplicativo no Heroku -->
-                    <appName>compactkeep2</appName>
-                    <!-- Inclua a URL do seu repositório no GitHub -->
-                    <includes>
-                        <include>target/*.jar</include>
-                    </includes>
-                    <!-- Use o perfil do Heroku -->
-                    <jdkVersion>1.8</jdkVersion>
-                    <processTypes>
-                        <web>java $JAVA_OPTS -jar target/compactkeep2.jar</web>
-                    </processTypes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+		<dependency>
+			<groupId>com.mongodb</groupId>
+			<artifactId>mongo</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.2.18</version> <!-- ou a versão mais recente -->
+</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.28</version> <!-- ou a versão mais recente disponível -->
+</dependency>
+
+		 <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+	</dependencies>
+	
+
+	<build>
+	<finalName>compactkeep2</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
